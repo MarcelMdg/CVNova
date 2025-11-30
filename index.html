@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CVNova – Générateur Pro & Programmes Essentiels</title>
+  <meta name="description" content="Crée un CV professionnel en 3 minutes. Templates ATS, export PDF, sans compte. Découvrez nos programmes Tech et Bureautique."/>
+  <meta name="theme-color" content="#0d0f1c"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2367e8f9'>CV</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0d0f1c; --surface:#141829; --glass:rgba(255,255,255,0.04);
+      --border:rgba(255,255,255,0.08); --text:#f1f5fb; --muted:#8a99b5;
+      --accent:#67e8f9; --accent2:#a78bfa;
+      --grad:linear-gradient(135deg,var(--accent),var(--accent2));
+      --glow:0 0 12px var(--accent),0 0 24px rgba(103,232,249,0.3);
+      --radius:16px;
+      --step-0:clamp(14px, .9vw + 1vh, 18px);
+      --step-1:clamp(20px, 1.2vw + 1.2vh, 28px);
+      --step-2:clamp(32px, 2vw + 2vh, 48px);
+      --step-3:clamp(44px, 3vw + 3vh, 64px);
+    }
+    [data-theme="light"]{
+      --bg:#f4f6fa; --surface:#ffffff; --glass:rgba(0,0,0,0.03);
+      --border:rgba(0,0,0,0.08); --text:#0d0f1c; --muted:#5a6474;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+    }
+    h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700}
+    a{color:inherit;text-decoration:none}
+
+    /* ------ HEADER ------ */
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:var(--glass);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:12px 48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+    .left{display:flex;align-items:center;gap:32px}
+    .logo{font-size:var(--step-2);background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    nav.horiz{display:flex;gap:24px}
+    nav.horiz a{color:var(--muted);font-weight:600;transition:color .2s}
+    nav.horiz a:hover{color:var(--text)}
+    .right{display:flex;align-items:center;gap:16px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 24px;border-radius:var(--radius);
+      font-weight:800;cursor:pointer;border:0;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .btn-primary{background:var(--grad);color:var(--bg);box-shadow:var(--glow);}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--accent),0 0 40px rgba(103,232,249,0.4);}
+    .btn-secondary{
+      background:transparent;
+      border:2px solid var(--accent);
+      color:var(--accent);
+      transition:all .3s ease;
+    }
+    .btn-secondary:hover{
+      background:var(--accent);
+      color:var(--bg);
+      transform:translateY(-2px);
+    }
+    .theme-toggle{
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:50%;
+      width:40px;height:40px;
+      display:grid;place-items:center;
+      cursor:pointer;
+    }
+    .mob-toggle{display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;width:40px;height:40px;place-items:center;font-size:20px;}
+    @media (max-width:900px){
+      header{padding:12px 24px}
+      nav.horiz{display:none}
+      .mob-toggle{display:grid}
+    }
+
+    /* ------ DRAWER MOBILE ------ */
+    #drawer{
+      position:fixed;
+      inset:0 40% 0 0;
+      background:var(--surface);
+      border-right:1px solid var(--border);
+      padding:80px 24px 24px;
+      transform:translateX(-100%);
+      transition:transform .3s;
+      z-index:25;
+    }
+    #drawer.open{transform:translateX(0)}
+    #drawer a{display:block;padding:12px 0;color:var(--muted)}
+
+    /* ------ MAIN ------ */
+    main{
+      flex:1;
+      padding:64px 48px;
+    }
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;
+      margin-bottom:96px;
+    }
+    .hero h1{font-size:var(--step-3);line-height:1.05}
+    .hero p{font-size:var(--step-1);color:var(--muted);margin:16px 0 32px}
+
+    /* ------ CV JEAN DOE PREMIUM ------ */
+    .mockup{
+      position:relative;height:480px;
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 20px 60px rgba(0,0,0,0.3), var(--glow);
+      display:flex;align-items:center;justify-content:center;
+    }
+   .cv-card{
+  width:340px;height:480px;
+  background:linear-gradient(145deg, var(--surface), var(--bg));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3), var(--glow);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  color:var(--text);
+  overflow:hidden;
+}
+.cv-header{
+  display:flex;align-items:center;gap:12px;
+}
+.cv-avatar{
+  width:48px;height:48px;border-radius:50%;background:var(--grad);flex-shrink:0;
+}
+.cv-name{
+  font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.cv-job{font-size:13px;color:var(--muted);}
+.cv-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.cv-txt,.cv-line{font-size:12px;line-height:1.3;color:var(--muted);}
+.cv-section{display:flex;flex-direction:column;gap:4px;}
+.skill-row{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--muted);
+}
+.skill-bar{
+  flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;
+}
+.skill-bar .fill{height:100%;background:var(--grad);}
+@media (max-width:480px){
+  .cv-card{width:100%;max-width:280px;height:auto;}
+}
+
+    /* ------ CARDS WITH ICONS ------ */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:32px;
+    }
+    .card{
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:32px 28px; /* Valeur d'origine */
+      position:relative;
+      overflow:hidden;
+      transition:transform .3s,box-shadow .3s;
+      line-height:1.55;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--glow);
+    }
+    
+    /* Styles pour les nouvelles cartes Programme (avec image) */
+    .card-image {
+      width: calc(100% + 56px); /* 100% + 2*28px padding */
+      height: 180px; 
+      object-fit: cover;
+      margin: -32px -28px 16px; /* Annule le padding de la carte pour étendre l'image */
+      border-radius: var(--radius) var(--radius) 0 0;
+      opacity: 0.8;
+      transition: opacity .3s ease;
+    }
+    .card:hover .card-image {
+      opacity: 1;
+    }
+    .card-btn {
+      margin-top: 16px;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .card h3{font-size:var(--step-1);margin-bottom:8px}
+    .card p{color:var(--muted)}
+    .tag{
+      display:inline-block;margin-top:16px;
+      padding:6px 12px;border-radius:999px;
+      background:var(--surface);
+      font-size:13px;color:var(--accent);
+    }
+    
+    /* ------ NEW ICONS ------ */
+    .card-icon{
+      font-size:32px;
+      margin-bottom:16px;
+      background:var(--grad);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      transition:transform .3s ease;
+    }
+    .card:hover .card-icon{
+      transform:scale(1.1);
+    }
+    
+    /* ------ BADGES (Réutilisés pour les niveaux) ------ */
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:12px;
+      font-size:11px;
+      font-weight:600;
+      margin-left:8px;
+    }
+    .badge-beginner{background:#4ade80;color:#064e3b;}
+    .badge-intermediate{background:#fbbf24;color:#78350f;}
+    .badge-advanced{background:#f87171;color:#7f1d1d;}
+    
+    /* ---------- ESPACES & RESPIRATION ---------- */
+    section{margin:96px 0}
+    @media (min-width:901px){
+      section+section{margin-top:144px}
+    }
+    .hero>div:first-child,.sub{max-width:680px}
+    h2{margin-bottom:16px}
+    .sub{margin:20px 0 40px}
+    @media (max-width:900px){
+      section{margin:64px 0}
+      section+section{margin-top:96px}
+    }
+
+    /* fade-in décalé pour chaque carte */
+    .card{
+      opacity:0;
+      transform:translateY(20px);
+      animation:fadeUp .6s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    @keyframes fadeUp{
+      to{opacity:1;transform:translateY(0)}
+    }
+    .card:nth-child(1){animation-delay:.05s}
+    .card:nth-child(2){animation-delay:.10s}
+    .card:nth-child(3){animation-delay:.15s}
+    .card:nth-child(4){animation-delay:.20s}
+    .card:nth-child(5){animation-delay:.25s}
+    .card:nth-child(6){animation-delay:.30s}
+
+
+    /* ------ FOOTER ------ */
+    footer{
+      background:var(--surface);
+      border-top:1px solid var(--border);
+      padding:64px 48px 32px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:48px;
+      margin-bottom:48px;
+    }
+    .footer-grid h4{
+      font-size:var(--step-0);
+      margin-bottom:12px;
+    }
+    .footer-grid a{
+      display:block;
+      color:var(--muted);
+      margin-bottom:8px;
+      transition:color .2s;
+    }
+    .footer-grid a:hover{
+      color:var(--text);
+    }
+    .bottom{
+      text-align:center;
+      font-size:13px;
+      color:var(--muted);
+    }
+    @media (max-width:900px){
+      main{padding:48px 24px}
+      .hero{grid-template-columns:1fr}
+    }
+
+    /* ------ REVEAL ------ */
+    .reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    
+        /* ------ WHATSAPP FLOAT BUTTON ------ */
+    .whatsapp-float{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      width:60px;
+      height:60px;
+      background-color:#25d366; /* Couleur officielle WhatsApp */
+      color:#fff;
+      border-radius:50%;
+      text-align:center;
+      font-size:30px;
+      box-shadow:2px 2px 3px rgba(0,0,0,0.4);
+      z-index:100;
+      display:grid;
+      place-items:center;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .whatsapp-float:hover{
+      transform:scale(1.1) translateY(-2px);
+      box-shadow:0 8px 15px rgba(37,211,102,0.6);
+    }
+    @media (max-width:900px){
+      .whatsapp-float{
+        width:50px;
+        height:50px;
+        font-size:25px;
+        bottom:16px;
+        right:16px;
+      }
+    }
+
+  </style>
+</head>
+<body data-theme="dark">
+
+  <header class="reveal">
+    <div class="left">
+      <div class="logo">CVNova</div>
+      <nav class="horiz">
+        <a href="#home">Accueil</a>
+        <a href="choix-template.html">Créer mon CV </a>
+        <a href="#programmes">Programmes</a>
+      </nav>
+    </div>
+    <div class="right">
+      <button class="theme-toggle" aria-label="Changer thème" onclick="toggleTheme()">🌓</button>
+    </div>
+    <button class="mob-toggle" onclick="toggleDrawer()">☰</button>
+  </header>
+
+  <aside id="drawer">
+        <nav>
+      <a href="#home" onclick="closeDrawer()">Accueil</a>
+      <a href="choix-template.html" onclick="closeDrawer()">Créer mon CV</a> 
+      <a href="#programmes" onclick="closeDrawer()">Programmes</a>
+          
+    </nav>
+  </aside>
+
+  <main>
+    <section id="home" class="hero reveal">
+      <div>
+        <h1>Ton CV<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">pro en 3 min</span></h1>
+        <p>Templates modernes, export PDF ultra-net, compatibles ATS. Zero pub, zero compte requis.</p>
+        <a href="choix-template.html" class="btn btn-primary">Créer mon CV</a>
+      </div>
+
+                <div class="mockup">
+            <div class="cv-card">
+              <div class="cv-header">
+                <div class="cv-avatar"></div>
+                <div>
+                  <div class="cv-name">Marcel Midogni</div>
+                  <div class="cv-job">Développeur Web full-stack </div>
+                </div>
+              </div>
+
+              <div class="cv-section">
+                <div class="cv-title">Profil</div>
+                <p class="cv-txt">Précision, créativité et expérience .</p>
+              </div>
+
+              <div class="cv-section">
+                <div class="cv-title">Compétences</div>
+                <div class="skill-row"><span>PHP/Laravel</span><div class="skill-bar"><div class="fill" style="width:80%"></div></div></div>
+                <div class="skill-row"><span>MySQL</span><div class="skill-bar"><div class="fill" style="width:75%"></div></div></div>
+                <div class="skill-row"><span>HTML/CSS</span><div class="skill-bar"><div class="fill" style="width:90%"></div></div></div>
+                <div class="skill-row"><span>JavaScript/React</span><div class="skill-bar"><div class="fill" style="width:70%"></div></div></div>
+              </div>
+
+              <div class="cv-section">
+                <div class="cv-title">Formation</div>
+                <div class="cv-line">Encadrement technique par un dev senior.</div>
+                <div class="cv-line">Montée en compétences via ressources professionnelles et ateliers pratiques.</div>
+              </div>
+
+              <div class="cv-section">
+                <div class="cv-title">Projets</div>
+                <div class="cv-line">Mini-Blog – Site e-commerce</div>
+                <div class="cv-line">Portfolio – site d'agence</div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+    <section id="cv" class="reveal">
+      <section>
+        <h2>Générateur de CV</h2>
+        <p class="sub">Sobres, créatifs ou tech — choisis ton style, remplis, télécharge.</p>
+        <div class="grid">
+          
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-robot"></i></div>
+            <h3>Optimisé pour l'ATS</h3>
+            <p>Passez le premier filtre ! Nos templates sont spécialement codés pour être **lus et acceptés** par les logiciels de recrutement (ATS), augmentant vos chances d'entretien.</p>
+            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+          </div>
+          
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>Export PDF Haute Définition</h3>
+            <p>Qualité d'impression professionnelle. Obtenez un fichier PDF **300 dpi** avec polices intégrées, garantissant une netteté impeccable sur tous les supports.</p>
+            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+          </div>
+          
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Confidentialité Totale</h3>
+            <p>Vos données restent **en sécurité, dans votre navigateur**. Aucune collecte, aucun partage, aucun compte requis. Un CV professionnel et respectueux de votre vie privée.</p>
+            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="programmes" class="reveal">
+      <h2>Devenez un profil complet et compétitif.</h2>
+      <p class="sub">Nos programmes sont spécialement conçus pour vous offrir un avantage décisif dans trois domaines essentiels du marché actuel : Tech, Bureautique et Soft Skills.</p>
+      
+      <div class="grid" style="margin-top: 48px;">
+        <div class="card" id="tech-program-card">
+          <img src="images.png" alt="Tech Program" class="card-image">
+          <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3 class="card-title">Expertise en Développement Web</h3>
+          <p class="card-text">Acquérez des compétences solides en programmation et en intelligence artificielle pour vous préparer à des rôles techniques exigeants. Nos cours pratiques vous permettront de construire des projets réels et de développer un portfolio impressionnant.</p>
+          <a href="https://ljwoqgiq.mychariow.shop/prd_hozx1w" class="btn btn-primary card-btn">En savoir plus</a>
+        </div>
+        
+        <div class="card" id="office-program-card">
+          <img src="image2.jpg" alt="Office Program" class="card-image">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <h3 class="card-title">Maîtrise des Outils Bureautiques</h3>
+          <p class="card-text">Devenez un expert des outils bureautiques essentiels comme Excel et Word. Nos programmes vous apprennent à utiliser ces outils de manière avancée pour gérer des projets complexes, analyser des données et créer des rapports professionnels.</p>
+          <a href="https://ljwoqgiq.mychariow.shop/marcel-tech" class="btn btn-primary card-btn">En savoir plus</a>
+        </div>
+        
+        <div class="card" id="soft-skills-program-card">
+          <img src="imag.png" alt="Soft Skills Program" class="card-image">
+          <div class="card-icon"><i class="fas fa-comments"></i></div>
+          <h3 class="card-title">Compétences Interpersonnelles et Leadership</h3>
+          <p class="card-text">Développez des compétences en communication, en leadership et en gestion de conflits. Apprenez à travailler en équipe, à résoudre des problèmes et à adopter un mindset positif et résilient, indispensables à la réussite dans n'importe quel domaine.</p>
+          <a href="https://ljwoqgiq.mychariow.shop/prd_rqil6b" class="btn btn-primary card-btn">En savoir plus</a>
+        </div>
+      </div>
+      
+     
+    </section>
+    
+  </main>
+
+  <footer class="reveal">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">CVNova</div>
+        <p>Crée ton CV pro en 3 minutes.<br>Privacy first, sans compte.</p>
+      </div>
+      <div>
+        <h4>Produits</h4>
+        <a href="#cv">Créer mon CV</a>
+        <a href="#programmes">Programmes Essentiels</a>
+      </div>
+      <div>
+        <h4>Catégories</h4>
+        <a href="#programmes">Développement Web</a>
+        <a href="#programmes">Pack Office</a>
+        <a href="#programmes">Développement Personnel</a>
+      </div>
+      <div>
+        <h4>Suivre</h4>
+        <a href="https://wa.me/22946016537" target="_blank">WhatsApp</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+    <div class="bottom">
+      © 2025 Marcel – tous droits réservés – <a href="#">Mentions légales</a>
+    </div>
+  </footer>
+  <a href="https://wa.me/22946016537" target="_blank" class="whatsapp-float" aria-label="Contactez-moi sur WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    /* ------ theme ------ */
+    function toggleTheme(){
+      const html=document.documentElement;
+      const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+      html.setAttribute('data-theme',next);
+      localStorage.setItem('theme',next);
+    }
+    (()=>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark'))();
+
+    /* ------ reveal ------ */
+    const io=new IntersectionObserver((e)=>e.forEach((el)=>{if(el.isIntersecting){el.target.classList.add('show');io.unobserve(el.target)}}),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+
+    /* ------ drawer ------ */
+    function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
+    function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
+  </script>
+</body>
+</html>

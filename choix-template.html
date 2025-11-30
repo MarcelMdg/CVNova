@@ -1,0 +1,260 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Choisis ton modèle - CV Design Nexus</title>
+  <meta name="description" content="Modèle professionnel : Moderne. Choisis, remplis, télécharge."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  <style>
+    :root{
+      --bg:#0d0f1c; --surface:#141829; --glass:rgba(255,255,255,0.04);
+      --border:rgba(255,255,255,0.08); --text:#f1f5fb; --muted:#8a99b5;
+      --accent:#67e8f9; --accent2:#a78bfa;
+      --grad:linear-gradient(135deg,var(--accent),var(--accent2));
+      --glow:0 0 12px var(--accent),0 0 24px rgba(103,232,249,0.3);
+      --radius:16px;
+      --step-0:clamp(14px, .9vw + 1vh, 18px);
+      --step-1:clamp(20px, 1.2vw + 1.2vh, 28px);
+      --step-2:clamp(32px, 2vw + 2vh, 48px);
+      --step-3:clamp(44px, 3vw + 3vh, 64px);
+    }
+    [data-theme="light"]{
+      --bg:#f4f6fa; --surface:#ffffff; --glass:rgba(0,0,0,0.03);
+      --border:rgba(0,0,0,0.08); --text:#0d0f1c; --muted:#5a6474;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+    }
+    h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700}
+    a{color:inherit;text-decoration:none}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:30;background:var(--glass);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    }
+    .left-header{display:flex;align-items:center;gap:32px}
+    .logo{font-size:var(--step-2);background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    nav.horiz{display:flex;gap:24px}
+    nav.horiz a{color:var(--muted);font-weight:600;transition:color .2s}
+    nav.horiz a:hover{color:var(--text)}
+    .right-header{display:flex;align-items:center;gap:16px}
+    .btn-primary-global{background:var(--grad);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:800;box-shadow:var(--glow);transition:transform .2s,box-shadow .2s}
+    .btn-primary-global:hover{transform:translateY(-2px)}
+    .theme-toggle{background:var(--glass);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;display:grid;place-items:center;cursor:pointer}
+    .mob-toggle{display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;width:40px;height:40px;place-items:center;font-size:20px}
+    @media (max-width:900px){header{padding:12px 24px} nav.horiz{display:none} .mob-toggle{display:grid}}
+
+    /* DRAWER */
+    #drawer{position:fixed;inset:0 40% 0 0;background:var(--surface);border-right:1px solid var(--border);padding:80px 24px 24px;transform:translateX(-100%);transition:transform .3s;z-index:25}
+    #drawer.open{transform:translateX(0)}
+    #drawer a{display:block;padding:12px 0;color:var(--muted)}
+
+    /* MAIN */
+    main{flex:1;padding:64px 48px}
+    .wrap{max-width:1040px;margin:0 auto}
+    .page-head{text-align:center;margin:80px 0 40px}
+    .page-head h1{font-size:var(--step-3)}
+    .page-head p{font-size:var(--step-1);color:var(--muted)}
+
+    .model-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:transform .3s,box-shadow .3s;text-align:center;max-width:520px;margin:0 auto}
+    .model-preview-link{display:block;width:100%;height:360px;border-radius:12px;overflow:hidden}
+    .model-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+    .model-preview-link:hover .model-img{transform:scale(1.03)}
+
+    /* HOW */
+    .how-section{margin-top:48px;padding:32px;border:1px solid var(--border);background:var(--surface);border-radius:var(--radius)}
+    .steps{margin-top:24px;display:grid;gap:20px}
+    .step{background:var(--glass);padding:18px;border-radius:12px;border:1px solid var(--border)}
+
+    /* FOOTER */
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:48px 48px 32px;margin-top:48px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:48px;margin-bottom:24px}
+    .footer-grid h4{font-size:16px;margin-bottom:12px}
+    .footer-grid a{display:block;color:var(--muted);margin-bottom:8px;transition:color .2s}
+    .footer-grid a:hover{color:var(--text)}
+    .bottom{text-align:center;font-size:13px;color:var(--muted)}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    @media (max-width:900px){main{padding:48px 24px}}
+      /* ------ SECTION COMMENT CA MARCHE ------ */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Crée une grille adaptative */
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .step-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: var(--surface);
+      /* Assure que l'effet reveal fonctionne bien sur les cartes */
+    }
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--grad); /* Utilisation du dégradé défini dans :root */
+      color: var(--bg);
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .step-card h3 {
+      font-size: 1.25rem;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .step-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+  </style>
+</head>
+  <body data-theme="dark">
+    <!-- ===== HEADER ===== --> 
+    <header class="reveal">
+    <div class="left-header">
+      <div class="logo">CVNova</div>
+            <nav class="horiz">
+        <a href="index.html">Accueil</a>
+        <a href="choix-template.html" class="active">Créer mon CV</a>
+        <a href="index.html#programmes">Programmes</a>
+      </nav>
+
+    </div>
+    <div class="right-header">
+      <!--<a class="btn-primary-global" href="#contact">Contact</a>-->
+      <button class="theme-toggle" aria-label="Changer thème" onclick="toggleTheme()">🌓</button>
+    </div>
+    <button class="mob-toggle" onclick="toggleDrawer()">☰</button>
+  </header>  
+    <!-- ===== DRAWER ===== -->  
+   <aside id="drawer">
+      <nav>
+      <a href="index.html" onclick="closeDrawer()">Accueil</a>
+      <a href="choix-template.html" onclick="closeDrawer()" class="active">Créer mon CV</a>
+      <a href="index.html#programmes" onclick="closeDrawer()">Programmes</a>
+    </nav>
+
+  </aside> 
+    <!-- ===== MAIN ===== --> 
+    <main>
+    <div class="wrap">
+      <div class="page-head reveal">
+        <h1>Modèle Moderne</h1>
+        <p>Sélectionne le style Moderne et démarre ta création.</p>
+      </div>
+      <!-- Un seul modèle -->
+  <div class="model-card reveal">
+    <a href="cv.html?template=moderne" class="model-preview-link">
+      <img src="models.jpg" alt="Aperçu modèle Moderne" class="model-img">
+    </a>
+    <div style="margin-top:12px">
+      <div style="font-weight:700;font-size:18px;">Modèle Moderne</div>
+      <div style="color:var(--muted);margin-top:6px">Design propre, sections claires, idéal pour candidatures modernes.</div>
+    </div>
+    <a class="btn-primary-global" href="cv.html?template=moderne" style="display:inline-block;margin-top:16px">Utiliser ce modèle</a>
+  </div>
+
+  <!-- Comment ça marche -->
+    <section id="comment-ca-marche" class="reveal section-small">
+    <h2 class="section-title">Comment ça marche ?</h2>
+    <p class="section-subtitle">
+      Créez votre CV professionnel en quelques minutes. L'éditeur est simple, efficace et basé sur les normes ATS.
+    </p>
+    
+    <div class="steps-grid">
+      
+      <div class="step-card reveal">
+        <span class="step-number">1</span>
+        <h3>Sélectionnez votre Modèle</h3>
+        <p>Choisissez parmi nos modèles modernes et professionnels, conçus pour maximiser l'impact visuel et la lisibilité.</p>
+      </div>
+
+      <div class="step-card reveal">
+        <span class="step-number">2</span>
+        <h3>Remplissez les Sections Clés</h3>
+        <p>Dans l'éditeur , complétez les champs structurés : Informations, Expérience, Formation, Compétences. Des **exemples** vous guideront.</p>
+      </div>
+
+      <div class="step-card reveal">
+        <span class="step-number">3</span>
+        <h3>Aperçu en Temps Réel</h3>
+        <p>Visualisez instantanément votre CV se construire et ajustez les textes, couleurs ou la mise en page en direct, sans recharger la page.</p>
+      </div>
+      
+      <div class="step-card reveal">
+        <span class="step-number">4</span>
+        <h3>Téléchargez en PDF Pro</h3>
+        <p>Une fois satisfait, exportez votre document final au format PDF optimisé, prêt à être envoyé aux recruteurs. **Sans compte et sans frais.**</p>
+      </div>
+    </div>
+  </section>
+
+
+
+</div>
+
+  </main>  <!-- ===== FOOTER ===== -->  <footer class="reveal">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">CVNova</div>
+        <p style="color:var(--muted);margin-top:8px">Crée ton CV pro en 3 minutes.<br>Privacy first, sans compte.</p>
+      </div>
+            <div>
+        <h4>Produits</h4>
+                <a href="choix-template.html">Créer mon CV</a>
+      </div>
+      <div>
+        <h4>Apprendre</h4>
+        <a href="index.html#programmes">Front-end Express</a>
+        <a href="index.html#programmes">Back-end Simplifié</a>
+      </div>
+
+      <div>
+        <h4>Suivre</h4>
+        <a href="https://wa.me/22946016537" target="_blank">WhatsApp</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+    <div class="bottom">
+      © 2025 Marcel – tous droits réservés – <a href="#">Mentions légales</a>
+    </div>
+  </footer>  <!-- ===== JS ===== -->  <script>
+    /* ------ theme ------ */
+    function toggleTheme(){
+      const html=document.documentElement;
+      const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+      html.setAttribute('data-theme',next);
+      localStorage.setItem('theme',next);
+    }
+    (function(){document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')})();
+
+    /* ------ reveal ------ */
+    const io=new IntersectionObserver((e)=>e.forEach((el)=>{if(el.isIntersecting){el.target.classList.add('show');io.unobserve(el.target)}}),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+
+    /* ------ drawer ------ */
+    function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
+    function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
+  </script></body>
+</html>

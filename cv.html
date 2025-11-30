@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CVNova-generation_de_cv </title>
+  <meta name="description" content="CV généré automatiquement – Développeur Full-Stack"/>
+  <meta name="theme-color" content="#0d0f1c"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2367e8f9'>CV</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="cv.css">
+</head>
+<body data-cv-theme="bleu">
+
+  <header class="reveal">
+    <div class="left-header">
+      <div class="logo">CVNova</div>
+      <nav class="horiz">
+        <a href="index.html">Accueil</a>
+        <a href="choix-template.html" class="active">Créer mon CV</a>
+        <a href="index.html#programmes">Programmes</a>
+      </nav>
+
+    </div>
+    <div class="right-header">
+      <!--<a href="#" class="btn-global btn-primary-global">Créer mon CV</a>-->
+      <button class="theme-toggle" aria-label="Changer thème" onclick="toggleTheme()">🌓</button>
+    </div>
+    <button class="mob-toggle" onclick="toggleDrawer()">☰</button>
+  </header>
+
+  <aside id="drawer">
+        <nav>
+      <a href="index.html" onclick="closeDrawer()">Accueil</a>
+      <a href="choix-template.html" onclick="closeDrawer()" class="active">Créer mon CV</a>
+      <a href="index.html#programmes" onclick="closeDrawer()">Programmes</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="wrap">
+      <nav class="nav-cv" aria-label="Navigation">
+        <button class="btn btn-cv-primary" id="toForm" aria-current="page">1. Remplir le formulaire</button>
+        <button class="btn btn-cv-secondary" id="toPreview">2. Aperçu / Télécharger</button>
+        <span class="cv-theme-label">Thème CV&nbsp;</span>
+        <select id="themeSelect" aria-label="Choisir un thème">
+          <option value="bleu">Bleu</option>
+          <option value="bordeaux">Bordeaux</option>
+          <option value="vert">Vert</option>
+        </select>
+      </nav>
+
+      <div id="formPage" class="form-page reveal" style="display:block;">
+        <div class="card">
+          <h3 class="card-title">Formulaire de génération</h3>
+          <div class="form-grid">
+            
+            <div>
+              <label for="fullName">Nom complet *</label>
+              <input type="text" id="fullName" placeholder="Nom Prénom" required data-example="MIDOGNI Sagbo Marcel">
+              <a href="#" class="btn-context-example" data-target="fullName">Voir l'exemple</a>
+            </div>
+            <div>
+              <label for="title">Titre / Poste *</label>
+              <input type="text" id="title" placeholder="Ex: Développeur Full-Stack" required data-example="Développeur Web Full-Stack (Frontend/Backend)">
+              <a href="#" class="btn-context-example" data-target="title">Voir l'exemple</a>
+            </div>
+            <div>
+              <label for="city">Ville</label>
+              <input type="text" id="city" placeholder="Ex: Calavi, Bénin" data-example="Calavi, Bénin">
+              <a href="#" class="btn-context-example" data-target="city">Voir l'exemple</a>
+            </div>
+            <div>
+              <label for="email">Email *</label>
+              <input type="email" id="email" placeholder="email@exemple.com" required data-example="marcelmidogni30@gmail.com">
+              <a href="#" class="btn-context-example" data-target="email">Voir l'exemple</a>
+            </div>
+            <div>
+               <label for="phone">Téléphone</label>
+               <input type="tel" id="phone" placeholder="+229 0146016537" data-example="+229 01 46 01 65 37">
+               <a href="#" class="btn-context-example" data-target="phone">Voir l'exemple</a>
+            </div>
+
+            <div class="full">
+              <label for="profile">Profil (phrase courte)</label>
+              <textarea id="profile" rows="3" placeholder="Décrivez vos points forts et ambition en 2-3 phrases." data-example="Développeur Full-Stack passionné avec 2 ans d'expérience. Spécialisé en React et Laravel, je crée des applications web robustes et performantes. Je combine une solide base en développement avec une expertise croissante en bioinformatique."></textarea>
+              <a href="#" class="btn-context-example" data-target="profile">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="education">Formation (une ligne = un diplôme)</label>
+              <textarea id="education" rows="3" placeholder="Ex: Master Bioinformatique – UAC (2023 – présent)" data-example="Parcours en Bioinformatique – Universités d'Abomey-Calavi (2023 – présent)&#10;Formation intensive certifiée « Développeur Full-Stack » – Mentorat privé (2024 – aujourd’hui)"></textarea>
+              <a href="#" class="btn-context-example" data-target="education">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="exp">Expériences (une ligne = un poste)</label>
+              <textarea id="exp" rows="3" placeholder="Ex: Lead Dev Full-Stack – Société X (2022-2024) : Missions..." data-example="Développeur Full-Stack Freelance – Divers clients PME (2025 – aujourd’hui) : conception et déploiement d’applications complètes avec React et Laravel.&#10;Junior Web Developer – Startup Tech Innov (2024) : maintenance et ajout de fonctionnalités sur plateformes existantes (HTML, CSS, JavaScript)."></textarea>
+              <a href="#" class="btn-context-example" data-target="exp">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="skills">Compétences (séparez par virgule)</label>
+              <textarea id="skills" rows="2" placeholder="Ex: HTML, CSS, JavaScript, API REST, SQL" data-example="Développement Front-End, API REST, SQL, Gestion de bases de données, Résolution de problèmes"></textarea>
+              <a href="#" class="btn-context-example" data-target="skills">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="tools">Outils (séparez par point-virgule)</label>
+              <textarea id="tools" rows="2" placeholder="Ex: Frontend: React, Vue; Backend: Laravel, Node" data-example="Frontend: HTML, CSS, JavaScript (ES6+), React; Backend: PHP, Laravel, SQL (MySQL/PostgreSQL); Git/GitHub; VS Code"></textarea>
+              <a href="#" class="btn-context-example" data-target="tools">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="langs">Langues</label>
+              <input type="text" id="langs" placeholder="Ex: Français : maternelle – Anglais : technique" data-example="Français : maternelle – Anglais : technique & conversationnel">
+              <a href="#" class="btn-context-example" data-target="langs">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="hobbies">Centres d'intérêt (séparez par virgule)</label>
+              <textarea id="hobbies" rows="2" placeholder="Ex: Football, Lecture, Volontariat" data-example="Intelligence artificielle, Échecs, Sport de combat, Lecture de science-fiction"></textarea>
+              <a href="#" class="btn-context-example" data-target="hobbies">Voir l'exemple</a>
+            </div>
+            <div class="full">
+              <label for="photoInput">Importer une photo</label>
+              <input type="file" id="photoInput" accept="image/*" aria-describedby="photoHelp">
+              <small id="photoHelp" class="help-text">Conseil : privilégier une photo buste, fond clair.</small>
+            </div>
+            <div class="full form-actions">
+              <button class="btn btn-cv-primary" id="generate">🧩 Générer mon CV</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="previewPage" style="display:none">
+        <div class="card preview-nav">
+          <div class="preview-title">Aperçu du CV</div>
+          <div class="preview-actions">
+            <button class="btn btn-cv-secondary" id="editBtn">Modifier</button>
+            <button class="btn btn-cv-primary" id="printBtn">📄 Télécharger en PDF</button>
+          </div>
+        </div>
+        <div id="cvPreview" class="reveal">
+          <div class="cv-container" id="cvContainer">
+            <aside class="left">
+              <img id="cvPhoto" src="" alt="photo" class="photo">
+              <h1 id="cvName">Nom Prénom</h1>
+              <h2 id="cvTitle">Titre</h2>
+
+              <div class="section-block">
+                <div class="section-title">Contact</div>
+                <ul id="cvContact">
+                  <li id="cvCity">Ville</li>
+                  <li id="cvEmail">email</li>
+                  <li id="cvPhone">Téléphone</li>
+                </ul>
+              </div>
+
+              <div class="section-block">
+                <div class="section-title">Outils</div>
+                <ul id="cvTools"></ul>
+              </div>
+
+              <div class="section-block">
+                <div class="section-title">Langues</div>
+                <ul><li id="cvLangs"></li></ul>
+              </div>
+
+              <div class="section-block">
+                <div class="section-title">Centres d'intérêt</div>
+                <ul id="cvHobbies"></ul>
+              </div>
+            </aside>
+
+            <main class="right">
+              <div class="profile section">
+                <h3>Profil</h3>
+                <p id="cvProfile"></p>
+              </div>
+
+              <div class="section">
+                <h3>Compétences</h3>
+                <ul id="cvSkills" class="tag-list"></ul>
+              </div>
+
+              <div class="section">
+                <h3>Formation</h3>
+                <ul id="cvEducation"></ul>
+              </div>
+
+              <div class="section">
+                <h3>Expériences</h3>
+                <ul id="cvExperience"></ul>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <div id="exampleNotification" class="example-notification">
+      <div class="notification-header">
+          <span id="exampleTitle">Exemple pour [Champ]</span>
+          <button class="close-btn" onclick="hideExampleNotification()">×</button>
+      </div>
+      <div class="notification-content">
+          <pre id="exampleContent"></pre>
+          <button id="useExampleBtn" class="btn btn-cv-primary">Utiliser cet exemple</button>
+      </div>
+  </div>
+
+  <footer class="reveal">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">CVNova</div>
+        <p class="footer-desc">Crée ton CV pro en 3 minutes.<br>Privacy first, sans compte.</p>
+      </div>
+      <div>
+        <h4>Produits</h4>
+          <a href="choix-template.html">Créer mon CV</a>
+      </div>
+      <div>
+        <h4>Apprendre</h4>
+        <a href="index.html#programmes">Front-end Express</a>
+        <a href="index.html#programmes">Back-end Simplifié</a>
+      </div>
+            
+      <div>
+        <h4>Suivre</h4>
+        <a href="https://wa.me/22946016537" target="_blank">WhatsApp</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+    <div class="bottom">
+      © 2025 Marcel – tous droits réservés – <a href="#">Mentions légales</a>
+    </div>
+  </footer>
+
+  <script src="cv.js"></script>
+  
+</body>
+</html>
