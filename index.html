@@ -353,17 +353,19 @@
   <header class="reveal">
     <div class="left">
       <div class="logo">CVNova</div>
-      <nav class="horiz">
-        <a href="#home">Accueil</a>
-        <a href="choix-template.html">Créer mon CV </a>
-        <a href="#programmes">Programmes</a>
-      </nav>
-    </div>
+      </div>
     <div class="right">
       <button class="theme-toggle" aria-label="Changer thème" onclick="toggleTheme()">🌓</button>
     </div>
+    <nav class="horiz">
+      <a href="#home">Accueil</a>
+      <a href="choix-template.html">Créer mon CV </a> 
+      <a href="#programmes">Programmes</a>
+    </nav>
     <button class="mob-toggle" onclick="toggleDrawer()">☰</button>
-  </header>
+</header>
+
+
 
   <aside id="drawer">
         <nav>
@@ -431,22 +433,22 @@
           <div class="card">
             <div class="card-icon"><i class="fas fa-robot"></i></div>
             <h3>Optimisé pour l'ATS</h3>
-            <p>Passez le premier filtre ! Nos templates sont spécialement codés pour être **lus et acceptés** par les logiciels de recrutement (ATS), augmentant vos chances d'entretien.</p>
-            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+            <p>Passez le premier filtre ! Nos templates sont spécialement codés pour être lus et acceptés par les logiciels de recrutement (ATS), augmentant vos chances d'entretien.</p>
+            <!--   <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>--
           </div>
           
           <div class="card">
             <div class="card-icon"><i class="fas fa-file-pdf"></i></div>
             <h3>Export PDF Haute Définition</h3>
-            <p>Qualité d'impression professionnelle. Obtenez un fichier PDF **300 dpi** avec polices intégrées, garantissant une netteté impeccable sur tous les supports.</p>
-            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+            <p>Qualité d'impression professionnelle. Obtenez un fichier PDF 300 dpi avec polices intégrées, garantissant une netteté impeccable sur tous les supports.</p>
+            <!--<a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>-->
           </div>
           
           <div class="card">
             <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
             <h3>Confidentialité Totale</h3>
-            <p>Vos données restent **en sécurité, dans votre navigateur**. Aucune collecte, aucun partage, aucun compte requis. Un CV professionnel et respectueux de votre vie privée.</p>
-            <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>
+            <p>Vos données restent en sécurité, dans votre navigateur. Aucune collecte, aucun partage, aucun compte requis. Un CV professionnel et respectueux de votre vie privée.</p>
+            <!--  <a href="choix-template.html" class="btn btn-secondary">Créer mon CV</a>-->
           </div>
         </div>
       </section>
@@ -512,8 +514,9 @@
       </div>
     </div>
     <div class="bottom">
-      © 2025 Marcel – tous droits réservés – <a href="#">Mentions légales</a>
-    </div>
+      © 2025 Marcel – tous droits réservés – <a href="mentions-legales.html">Mentions légales</a>
+   </div>
+
   </footer>
   <a href="https://wa.me/22946016537" target="_blank" class="whatsapp-float" aria-label="Contactez-moi sur WhatsApp">
     <i class="fab fa-whatsapp"></i>
@@ -533,7 +536,7 @@
     const io=new IntersectionObserver((e)=>e.forEach((el)=>{if(el.isIntersecting){el.target.classList.add('show');io.unobserve(el.target)}}),{threshold:.15});
     document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
 
-    /* ------ drawer ------ */
+      /* ------ drawer ------ */
     function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
     function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
   </script>
